@@ -86,6 +86,7 @@ defmodule AgroconnectWeb do
       # Core UI components and translation
       import AgroconnectWeb.CoreComponents
       import AgroconnectWeb.Gettext
+      import AgroconnectWeb.WelcomePage
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS

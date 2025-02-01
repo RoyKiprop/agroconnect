@@ -17,11 +17,11 @@ defmodule AgroconnectWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", AgroconnectWeb do
-    pipe_through :browser
+  # scope "/", AgroconnectWeb do
+  #   pipe_through :browser
 
-    get "/", PageController, :home
-  end
+  #   get "/", PageController, :home
+  # end
 
   # Other scopes may use custom stacks.
   # scope "/api", AgroconnectWeb do
@@ -78,6 +78,7 @@ defmodule AgroconnectWeb.Router do
 
     live_session :current_user,
       on_mount: [{AgroconnectWeb.UserAuth, :mount_current_user}] do
+      live "/", WelcomeLive.Index, :index
       live "/users/confirm/:token", UserConfirmationLive, :edit
       live "/users/confirm", UserConfirmationInstructionsLive, :new
     end
