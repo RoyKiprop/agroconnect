@@ -5,14 +5,25 @@ defmodule Agroconnect.Repo.Migrations.CreateUsersAuthTables do
     execute "CREATE EXTENSION IF NOT EXISTS citext", ""
 
     create table(:users) do
+      add :name, :string
+      add :phone, :string
       add :email, :citext, null: false
       add :hashed_password, :string, null: false
       add :confirmed_at, :utc_datetime
+      add :role, :string, default: "user", null: false
+      add :is_2fa_enabled, :boolean, default: false
+      add :is_active, :boolean, default: false
+      add :is_admin, :boolean, default: false
+      add :profile_photo_url, :string
+      add :deleted_at, :utc_datetime
+
+      add :role_id, references(:roles, on_delete: :restrict), null: false
 
       timestamps(type: :utc_datetime)
     end
 
     create unique_index(:users, [:email])
+    create unique_index(:users, [:phone])
 
     create table(:users_tokens) do
       add :user_id, references(:users, on_delete: :delete_all), null: false
