@@ -3,16 +3,16 @@ defmodule AgroconnectWeb.WelcomePage do
 
   def welcome(assigns) do
     ~H"""
-    <div class="min-h-screen bg-gradient-to-br from-[#1e5b3e] via-[#276d4a] to-[#0f3922] flex flex-col items-center justify-center p-4 relative overflow-hidden">
+    <div class="min-h-screen bg-white flex flex-col items-center justify-center p-4 relative overflow-hidden">
       <!-- Decorative Background Elements -->
       <div class="absolute inset-0 overflow-hidden">
-        <div class="absolute top-0 left-0 w-96 h-96 bg-[#4ade80]/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-[#11643C]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2">
         </div>
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-[#64b5f6]/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2">
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-[#11643C]/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2">
         </div>
         <!-- Additional subtle decorative elements -->
-        <div class="absolute top-1/4 right-1/4 w-64 h-64 bg-[#86efac]/5 rounded-full blur-2xl"></div>
-        <div class="absolute bottom-1/4 left-1/4 w-72 h-72 bg-[#90caf9]/5 rounded-full blur-2xl">
+        <div class="absolute top-1/3 right-1/3 w-72 h-72 bg-[#11643C]/5 rounded-full blur-2xl"></div>
+        <div class="absolute bottom-1/3 left-1/3 w-64 h-64 bg-[#11643C]/5 rounded-full blur-2xl">
         </div>
       </div>
       
@@ -20,10 +20,10 @@ defmodule AgroconnectWeb.WelcomePage do
       <div class="text-center mb-12 relative">
         <div class="mb-3">
           <!-- Logo Icon -->
-          <div class="inline-block p-3 rounded-full bg-white/10 backdrop-blur-sm mb-2">
+          <div class="inline-block p-4 rounded-full bg-[#11643C]/10 mb-3 shadow-lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-10 w-10 text-[#4ade80]"
+              class="h-12 w-12 text-[#11643C]"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -37,28 +37,28 @@ defmodule AgroconnectWeb.WelcomePage do
             </svg>
           </div>
         </div>
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4">
           Welcome to
-          <span class="bg-clip-text text-transparent bg-gradient-to-r from-[#4ade80] to-[#bbf7d0]">
+          <span class="text-[#11643C]">
             AgroConnect
           </span>
         </h1>
-        <p class="text-xl md:text-2xl text-[#bbf7d0] drop-shadow max-w-2xl mx-auto">
+        <p class="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto">
           Connecting You with Quality Veterinary Care
         </p>
       </div>
       
     <!-- Login Options Container -->
-      <div class="w-full max-w-5xl bg-white/8 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-white/10 relative">
-        <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-0">
+      <div class="w-full max-w-5xl bg-white rounded-2xl p-8 shadow-2xl border border-gray-100 relative">
+        <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-4">
           
     <!-- Farmer Section -->
-          <div class="w-full md:w-1/2 text-center group px-4">
+          <div class="w-full md:w-1/2 text-center group px-6 py-4 bg-gray-50 rounded-xl border border-gray-100 transition-all duration-300 hover:shadow-lg">
             <div class="mb-6 transform transition-transform duration-300 group-hover:scale-105">
-              <div class="inline-block p-4 rounded-full bg-[#4ade80]/15 mb-4 shadow-lg">
+              <div class="inline-block p-4 rounded-full bg-[#11643C]/10 mb-4 shadow-lg">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-9 w-9 text-[#4ade80]"
+                  class="h-10 w-10 text-[#11643C]"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -71,33 +71,31 @@ defmodule AgroconnectWeb.WelcomePage do
                   />
                 </svg>
               </div>
-              <h2 class="text-2xl md:text-3xl font-semibold text-[#86efac] mb-4">Farmer Portal</h2>
-              <p class="text-white/90 mb-4 px-4">
+              <h2 class="text-2xl md:text-3xl font-semibold text-[#11643C] mb-4">Farmer Portal</h2>
+              <p class="text-gray-600 mb-4 px-4">
                 Manage your livestock healthcare efficiently with expert veterinary support
               </p>
-              <p class="text-sm text-[#bbdefb] mb-6">Access professional veterinary services 24/7</p>
+              <p class="text-sm text-gray-500 mb-6">Access professional veterinary services 24/7</p>
             </div>
             <.link
               navigate="/farmers"
-              class="relative overflow-hidden bg-gradient-to-r from-[#22c55e] to-[#4ade80] text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 group-hover:shadow-[#4ade80]/30 group-hover:shadow-lg"
+              class="relative overflow-hidden bg-[#11643C] text-white px-8 py-3.5 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg hover:bg-[#0d5231]"
             >
               <span class="relative z-10">Continue as Farmer</span>
-              <span class="absolute inset-0 bg-gradient-to-r from-[#16a34a] to-[#34d399] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              </span>
             </.link>
           </div>
           
     <!-- Vertical Separator -->
-          <div class="w-full h-px md:w-px md:h-60 bg-gradient-to-b from-transparent via-[#86efac]/30 to-transparent md:mx-8">
+          <div class="hidden md:block w-px h-60 bg-gradient-to-b from-transparent via-gray-200 to-transparent mx-2">
           </div>
           
     <!-- Pet Owner Section -->
-          <div class="w-full md:w-1/2 text-center group px-4">
+          <div class="w-full md:w-1/2 text-center group px-6 py-4 bg-gray-50 rounded-xl border border-gray-100 transition-all duration-300 hover:shadow-lg">
             <div class="mb-6 transform transition-transform duration-300 group-hover:scale-105">
-              <div class="inline-block p-4 rounded-full bg-[#64b5f6]/15 mb-4 shadow-lg">
+              <div class="inline-block p-4 rounded-full bg-[#11643C]/10 mb-4 shadow-lg">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-9 w-9 text-[#64b5f6]"
+                  class="h-10 w-10 text-[#11643C]"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -110,35 +108,33 @@ defmodule AgroconnectWeb.WelcomePage do
                   />
                 </svg>
               </div>
-              <h2 class="text-2xl md:text-3xl font-semibold text-[#90caf9] mb-4">Pet Owner Portal</h2>
-              <p class="text-white/90 mb-4 px-4">
+              <h2 class="text-2xl md:text-3xl font-semibold text-[#11643C] mb-4">Pet Owner Portal</h2>
+              <p class="text-gray-600 mb-4 px-4">
                 Your one-stop solution for all your pet's healthcare needs
               </p>
-              <p class="text-sm text-[#bbdefb] mb-6">
+              <p class="text-sm text-gray-500 mb-6">
                 Book appointments and track pet health records
               </p>
             </div>
             <.link
               navigate="/pet-owners"
-              class="relative overflow-hidden bg-gradient-to-r from-[#2196f3] to-[#64b5f6] text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 group-hover:shadow-[#64b5f6]/30 group-hover:shadow-lg"
+              class="relative overflow-hidden bg-[#11643C] text-white px-8 py-3.5 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg hover:bg-[#0d5231]"
             >
               <span class="relative z-10">Continue as Pet Owner</span>
-              <span class="absolute inset-0 bg-gradient-to-r from-[#1e88e5] to-[#42a5f5] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              </span>
             </.link>
           </div>
         </div>
       </div>
       
     <!-- Footer Text -->
-      <div class="mt-10 text-center relative">
-        <p class="text-[#bbdefb] text-sm font-medium mb-3">
+      <div class="mt-12 text-center relative">
+        <p class="text-gray-600 text-base font-medium mb-5">
           Join thousands of satisfied users who trust AgroConnect
         </p>
         <div class="flex flex-wrap items-center justify-center gap-4 mt-4">
-          <span class="px-4 py-2 rounded-full bg-[#16a34a]/15 text-[#bbf7d0] text-xs font-medium border border-[#4ade80]/20 shadow-sm">
+          <span class="px-4 py-2 rounded-full bg-[#11643C]/10 text-gray-700 text-sm font-medium border border-[#11643C]/20 shadow-sm">
             <svg
-              class="w-3 h-3 inline mr-1"
+              class="w-4 h-4 inline mr-1.5 text-[#11643C]"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -154,9 +150,9 @@ defmodule AgroconnectWeb.WelcomePage do
             </svg>
             Available 24/7
           </span>
-          <span class="px-4 py-2 rounded-full bg-[#1e88e5]/15 text-[#bbdefb] text-xs font-medium border border-[#64b5f6]/20 shadow-sm">
+          <span class="px-4 py-2 rounded-full bg-[#11643C]/10 text-gray-700 text-sm font-medium border border-[#11643C]/20 shadow-sm">
             <svg
-              class="w-3 h-3 inline mr-1"
+              class="w-4 h-4 inline mr-1.5 text-[#11643C]"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -172,9 +168,9 @@ defmodule AgroconnectWeb.WelcomePage do
             </svg>
             Trusted by Professionals
           </span>
-          <span class="px-4 py-2 rounded-full bg-[#1e88e5]/15 text-[#bbdefb] text-xs font-medium border border-[#64b5f6]/20 shadow-sm">
+          <span class="px-4 py-2 rounded-full bg-[#11643C]/10 text-gray-700 text-sm font-medium border border-[#11643C]/20 shadow-sm">
             <svg
-              class="w-3 h-3 inline mr-1"
+              class="w-4 h-4 inline mr-1.5 text-[#11643C]"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -194,7 +190,7 @@ defmodule AgroconnectWeb.WelcomePage do
       </div>
       
     <!-- Version Info -->
-      <div class="mt-8 text-[#bbf7d0]/50 text-xs">
+      <div class="mt-8 text-gray-400 text-xs">
         AgroConnect v1.0 © 2025
       </div>
     </div>
