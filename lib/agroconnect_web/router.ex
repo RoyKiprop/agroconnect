@@ -79,6 +79,8 @@ defmodule AgroconnectWeb.Router do
     live_session :current_user,
       on_mount: [{AgroconnectWeb.UserAuth, :mount_current_user}] do
       live "/", WelcomeLive.Index, :index
+      live "/pet-owners", PetLive.Index, :index
+      live "/farmers", FarmerLive.Index, :index
       live "/users/confirm/:token", UserConfirmationLive, :edit
       live "/users/confirm", UserConfirmationInstructionsLive, :new
     end

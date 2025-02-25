@@ -17,8 +17,6 @@ defmodule Agroconnect.Repo.Migrations.CreateUsersAuthTables do
       add :profile_photo_url, :string
       add :deleted_at, :utc_datetime
 
-      add :role_id, references(:roles, on_delete: :restrict), null: false
-
       timestamps(type: :utc_datetime)
     end
 
