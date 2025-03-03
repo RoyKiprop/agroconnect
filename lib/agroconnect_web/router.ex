@@ -71,6 +71,14 @@ defmodule AgroconnectWeb.Router do
     end
   end
 
+  scope "/vet", AgroconnectWeb do
+    pipe_through [:browser]
+
+    live_session(:vet_dashboard, on_mount: [{AgroconnectWeb.UserAuth, :mount_current_user}]) do
+      live "/", VetDashboardLive.Index, :index
+    end
+  end
+
   scope "/", AgroconnectWeb do
     pipe_through [:browser]
 
