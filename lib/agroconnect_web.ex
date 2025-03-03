@@ -67,6 +67,15 @@ defmodule AgroconnectWeb do
     end
   end
 
+  def user_live_view do
+    quote do
+      use Phoenix.LiveView,
+        layout: {AgroconnectWeb.Layouts, :user}
+
+      unquote(html_helpers())
+    end
+  end
+
   def live_component do
     quote do
       use Phoenix.LiveComponent
@@ -80,6 +89,7 @@ defmodule AgroconnectWeb do
       use Phoenix.Component
 
       import AgroconnectWeb.VetComponents
+      import AgroconnectWeb.UserComponents
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
