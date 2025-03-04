@@ -5,7 +5,7 @@ defmodule AgroconnectWeb.VetComponents do
 
   def vet_sidebar(assigns) do
     # For now, hardcode the current path for development
-    assigns = assign_new(assigns, :current_path, fn -> "/dashboard" end)
+    assigns = assign_new(assigns, :current_path, fn -> "/vet" end)
 
     ~H"""
     <aside class="flex flex-col h-screen bg-white shadow-lg border-r border-gray-200 w-64 fixed top-0 left-0 z-30">
@@ -40,14 +40,17 @@ defmodule AgroconnectWeb.VetComponents do
       </div>
 
       <nav class="flex-1 py-6 px-4 space-y-1 overflow-y-auto">
-        <.menu_item current_path={@current_path} path="/profile" title="Profile" />
-        <.menu_item current_path={@current_path} path="/dashboard" title="Dashboard" />
-        <.menu_item current_path={@current_path} path="/bookings" title="Bookings" />
-        <.menu_item current_path={@current_path} path="/opening-hours" title="Opening Hours" />
+        <.menu_item current_path={@current_path} path="/vet" title="Dashboard" />
+        <.menu_item current_path={@current_path} path="/vet/profile" title="Profile" />
+        <.menu_item current_path={@current_path} path="/vet/appointments" title="Bookings" />
+        <.menu_item current_path={@current_path} path="/vet/opening-hours" title="Opening Hours" />
       </nav>
       <div class="p-4 space-y-3 border-t border-gray-200">
         <!-- Messages button -->
-        <button class="flex items-center justify-between w-full px-4 py-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+        <.link
+          navigate="/vet/messages"
+          class="flex items-center justify-between w-full px-4 py-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+        >
           <div class="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -68,11 +71,11 @@ defmodule AgroconnectWeb.VetComponents do
           <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-500 rounded-full">
             2
           </span>
-        </button>
+        </.link>
         
     <!-- Help button -->
-        <a
-          href="/help"
+        <.link
+          navigate="/vet/contact-us"
           class="flex items-center px-4 py-3 text-sm font-medium text-gray-700 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
         >
           <svg
@@ -90,7 +93,7 @@ defmodule AgroconnectWeb.VetComponents do
             />
           </svg>
           <span class="ml-3">Help & Support</span>
-        </a>
+        </.link>
       </div>>
     </aside>
     """
@@ -109,8 +112,8 @@ defmodule AgroconnectWeb.VetComponents do
       )
 
     ~H"""
-    <a
-      href={@path}
+    <.link
+      navigate={@path}
       class={"flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors #{@active_classes}"}
     >
       {raw(get_icon(@path))}
@@ -118,11 +121,11 @@ defmodule AgroconnectWeb.VetComponents do
       <%= if @active do %>
         <span class="ml-auto h-2 w-2 rounded-full bg-emerald-500"></span>
       <% end %>
-    </a>
+    </.link>
     """
   end
 
-  defp get_icon("/profile") do
+  defp get_icon("/vet/profile") do
     """
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
@@ -130,7 +133,7 @@ defmodule AgroconnectWeb.VetComponents do
     """
   end
 
-  defp get_icon("/bookings") do
+  defp get_icon("/vet/appointments") do
     """
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
@@ -138,7 +141,7 @@ defmodule AgroconnectWeb.VetComponents do
     """
   end
 
-  defp get_icon("/dashboard") do
+  defp get_icon("/vet") do
     """
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" />
@@ -146,7 +149,7 @@ defmodule AgroconnectWeb.VetComponents do
     """
   end
 
-  defp get_icon("/opening-hours") do
+  defp get_icon("/vet/opening-hours") do
     """
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />

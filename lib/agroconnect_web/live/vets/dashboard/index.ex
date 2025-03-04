@@ -1,4 +1,4 @@
-defmodule AgroconnectWeb.VetDashboardLive.Index do
+defmodule AgroconnectWeb.Vets.Dashboard do
   use AgroconnectWeb, :vet_live_view
 
   def mount_(_params, _session, socket) do
