@@ -76,6 +76,15 @@ defmodule AgroconnectWeb do
     end
   end
 
+  def admin_live_view do
+    quote do
+      use Phoenix.LiveView,
+        layout: {AgroconnectWeb.Layouts, :admin}
+
+      unquote(html_helpers())
+    end
+  end
+
   def live_component do
     quote do
       use Phoenix.LiveComponent
@@ -87,9 +96,6 @@ defmodule AgroconnectWeb do
   def html do
     quote do
       use Phoenix.Component
-
-      import AgroconnectWeb.VetComponents
-      import AgroconnectWeb.UserComponents
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
@@ -107,7 +113,9 @@ defmodule AgroconnectWeb do
       # Core UI components and translation
       import AgroconnectWeb.CoreComponents
       import AgroconnectWeb.Gettext
-      import AgroconnectWeb.WelcomePage
+      import AgroconnectWeb.VetComponents
+      import AgroconnectWeb.UserComponents
+      import AgroconnectWeb.AdminComponents
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS

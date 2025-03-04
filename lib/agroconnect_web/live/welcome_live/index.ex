@@ -1,6 +1,8 @@
 defmodule AgroconnectWeb.WelcomeLive.Index do
   use AgroconnectWeb, :live_view
 
+  import AgroconnectWeb.WelcomePage
+
   def mount(_params, _session, socket) do
     {:ok, socket}
   end
