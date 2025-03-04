@@ -1,4 +1,4 @@
-defmodule AgroconnectWeb.UserDashboardLive.Index do
+defmodule AgroconnectWeb.Users.Messages do
   use AgroconnectWeb, :user_live_view
 
   def mount(_params, _session, socket) do
@@ -7,7 +7,7 @@ defmodule AgroconnectWeb.UserDashboardLive.Index do
 
   def render(assigns) do
     ~H"""
-    <h1>Listing Users</h1>
+    <h1>Messages</h1>
     """
   end
 end

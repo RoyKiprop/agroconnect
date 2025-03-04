@@ -3,7 +3,7 @@ defmodule AgroconnectWeb.UserComponents do
   import Phoenix.HTML, only: [raw: 1]
 
   def user_sidebar(assigns) do
-    assigns = assign_new(assigns, :current_path, fn -> "/profile" end)
+    assigns = assign_new(assigns, :current_path, fn -> "/user" end)
 
     ~H"""
     <aside class="flex flex-col h-screen bg-white shadow-lg border-r border-gray-200 w-64 fixed top-0 left-0 z-30">
@@ -41,22 +41,29 @@ defmodule AgroconnectWeb.UserComponents do
         <div class="mb-4 px-4">
           <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Account</h3>
         </div>
-        <.menu_item current_path={@current_path} path="/profile" title="My Profile" />
-        <.menu_item current_path={@current_path} path="/appointments" title="My Appointments" />
+        <.menu_item current_path={@current_path} path="/user" title="My Profile" />
+        <.menu_item current_path={@current_path} path="/user/my-appointments" title="My Appointments" />
         <div class="pt-4">
           <div class="mb-4 px-4">
             <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Services</h3>
           </div>
-          <.menu_item current_path={@current_path} path="/available-vets" title="Find Nearest Vet" />
-          <.menu_item current_path={@current_path} path="/schedule" title="Book Appointment" />
-          <.menu_item current_path={@current_path} path="/upload-image" title="Upload Image" />
-          <.menu_item current_path={@current_path} path="/ai-assistant" title="Chat with AI" />
+          <.menu_item
+            current_path={@current_path}
+            path="/user/available-vets"
+            title="Find Nearest Vet"
+          />
+          <.menu_item current_path={@current_path} path="/user/bookings" title="Book Appointment" />
+          <.menu_item current_path={@current_path} path="/user/upload-image" title="Upload Image" />
+          <.menu_item current_path={@current_path} path="/user/ai-assistant" title="Chat with AI" />
         </div>
       </nav>
 
       <div class="p-4 space-y-3 border-t border-gray-200">
         <!-- Messages button -->
-        <button class="flex items-center justify-between w-full px-4 py-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+        <.link
+          navigate="/user/messages"
+          class="flex items-center justify-between w-full px-4 py-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+        >
           <div class="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -77,11 +84,11 @@ defmodule AgroconnectWeb.UserComponents do
           <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-500 rounded-full">
             2
           </span>
-        </button>
+        </.link>
         
     <!-- Help button -->
-        <a
-          href="/help"
+        <.link
+          navigate="/user/help"
           class="flex items-center px-4 py-3 text-sm font-medium text-gray-700 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
         >
           <svg
@@ -99,7 +106,7 @@ defmodule AgroconnectWeb.UserComponents do
             />
           </svg>
           <span class="ml-3">Help & Support</span>
-        </a>
+        </.link>
       </div>
     </aside>
     """
@@ -131,7 +138,7 @@ defmodule AgroconnectWeb.UserComponents do
     """
   end
 
-  defp get_icon("/profile") do
+  defp get_icon("/user") do
     """
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
@@ -139,7 +146,7 @@ defmodule AgroconnectWeb.UserComponents do
     """
   end
 
-  defp get_icon("/appointments") do
+  defp get_icon("/user/my-appointments") do
     """
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
@@ -147,7 +154,7 @@ defmodule AgroconnectWeb.UserComponents do
     """
   end
 
-  defp get_icon("/available-vets") do
+  defp get_icon("/user/available-vets") do
     """
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
@@ -155,7 +162,7 @@ defmodule AgroconnectWeb.UserComponents do
     """
   end
 
-  defp get_icon("/schedule") do
+  defp get_icon("/user/bookings") do
     """
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
@@ -163,7 +170,7 @@ defmodule AgroconnectWeb.UserComponents do
     """
   end
 
-  defp get_icon("/upload-image") do
+  defp get_icon("/user/upload-image") do
     """
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
@@ -171,7 +178,7 @@ defmodule AgroconnectWeb.UserComponents do
     """
   end
 
-  defp get_icon("/ai-assistant") do
+  defp get_icon("/user/ai-assistant") do
     """
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.5 20.25h-9a1.5 1.5 0 0 1-1.5-1.5v-10.5a1.5 1.5 0 0 1 1.5-1.5h9a1.5 1.5 0 0 1 1.5 1.5v10.5a1.5 1.5 0 0 1-1.5 1.5Z" />
