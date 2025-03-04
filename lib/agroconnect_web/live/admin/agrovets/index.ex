@@ -1,4 +1,4 @@
-defmodule AgroconnectWeb.AdminLive.Index do
+defmodule AgroconnectWeb.Admin.Agrovets.Index do
   use AgroconnectWeb, :admin_live_view
 
   def mount(_params, _session, socket) do
@@ -7,7 +7,7 @@ defmodule AgroconnectWeb.AdminLive.Index do
 
   def render(assigns) do
     ~H"""
-    <h1>Listing admin</h1>
+    <h1>Agrovets</h1>
     """
   end
 end

@@ -75,7 +75,13 @@ defmodule AgroconnectWeb.Router do
     pipe_through [:browser]
 
     live_session(:admin, on_mount: [{AgroconnectWeb.UserAuth, :mount_current_user}]) do
-      live "/", AdminLive.Index, :index
+      live "/", Admin.Dashboard, :index
+      live "/users", Admin.UsersLive, :index
+      live "/vets", Admin.VetsLive, :index
+      live "/roles", Admin.Roles, :index
+      live "/profiles", Admin.Profiles, :index
+      live "/agrovets", Admin.Agrovets.Index, :index
+      live "/logs", Admin.Logs, :index
     end
   end
 
