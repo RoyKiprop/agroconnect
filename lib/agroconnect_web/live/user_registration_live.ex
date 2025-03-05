@@ -1,21 +1,26 @@
 defmodule AgroconnectWeb.UserRegistrationLive do
-  use AgroconnectWeb, :live_view
+  use AgroconnectWeb, :register_live_view
 
   alias Agroconnect.Account
   alias Agroconnect.Account.User
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm">
-      <.header class="text-center">
-        Register for an account
-        <:subtitle>
+    <div class="mx-auto max-w-xl">
+      <.header class="text-center space-y-2">
+        <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-emerald-800 drop-shadow-sm mb-4">
+          Register for an account
+        </h2>
+        <p class="text-gray-600">
           Already registered?
-          <.link navigate={~p"/users/log_in"} class="font-semibold text-brand hover:underline">
+          <.link
+            navigate={~p"/users/login"}
+            class="font-semibold text-emerald-600 hover:text-emerald-700"
+          >
             Log in
           </.link>
           to your account now.
-        </:subtitle>
+        </p>
       </.header>
 
       <.simple_form
@@ -31,13 +36,70 @@ defmodule AgroconnectWeb.UserRegistrationLive do
           Oops, something went wrong! Please check the errors below.
         </.error>
 
-        <.input field={@form[:email]} type="email" label="Email" required />
-        <.input field={@form[:password]} type="password" label="Password" required />
+        <div class="flex space-x-4">
+          <.input
+            field={@form[:first_name]}
+            type="text"
+            label="First Name"
+            placeholder="Enter first name"
+            required
+            class="w-full"
+          />
+
+          <.input
+            field={@form[:last_name]}
+            type="text"
+            label="Last Name"
+            placeholder="Enter last name"
+            required
+            class="w-full"
+          />
+        </div>
+
+        <.input
+          field={@form[:email]}
+          type="email"
+          label="Email"
+          placeholder="Enter your email address"
+          required
+        />
+
+        <.input
+          field={@form[:password]}
+          type="password"
+          label="Password"
+          placeholder="Create a strong password"
+          required
+        />
+
+        <.input
+          field={@form[:password_confirmation]}
+          type="password"
+          label="Confirm Password"
+          placeholder="Repeat your password"
+          required
+        />
 
         <:actions>
-          <.button phx-disable-with="Creating account..." class="w-full">Create an account</.button>
+          <.button
+            phx-disable-with="Creating account..."
+            class="w-full bg-emerald-600 text-white hover:bg-emerald-700"
+          >
+            Create an account
+          </.button>
         </:actions>
       </.simple_form>
+
+      <p class="text-center text-sm mt-4 text-gray-600">
+        By creating an account, you agree to our
+        <.link href="#" class="text-emerald-600 hover:text-emerald-700 font-semibold">
+          Terms of Service
+        </.link>
+        and
+        <.link href="#" class="text-emerald-600 hover:text-emerald-700 font-semibold">
+          Privacy Policy
+        </.link>
+      </p>
     </div>
     """
   end

@@ -1,11 +1,11 @@
 defmodule AgroconnectWeb.UserResetPasswordLive do
-  use AgroconnectWeb, :live_view
+  use AgroconnectWeb, :login_live_view
 
   alias Agroconnect.Account
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm">
+    <div class="mx-auto max-w-lg">
       <.header class="text-center">Reset Password</.header>
 
       <.simple_form
