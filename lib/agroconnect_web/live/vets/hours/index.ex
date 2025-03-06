@@ -2,7 +2,9 @@ defmodule AgroconnectWeb.Vets.Hours do
   use AgroconnectWeb, :vet_live_view
 
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    {:ok,
+     socket
+     |> assign(page_title: "Opening hours")}
   end
 
   def render(assigns) do
