@@ -1,4 +1,4 @@
-defmodule Agroconnect.Bookings.Bookings do
+defmodule Agroconnect.Bookings do
   @moduledoc """
   Booking context file
   """

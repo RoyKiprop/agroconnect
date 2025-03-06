@@ -1,13 +1,12 @@
-defmodule AgroconnectWeb.Vets.Appointments do
+defmodule AgroconnectWeb.Vets.Appointments.Index do
   use AgroconnectWeb, :vet_live_view
 
-  def mount(_params, _session, socket) do
-    {:ok, socket}
-  end
+  alias Agroconnect.Bookings
 
-  def render(assigns) do
-    ~H"""
-    <h1>Bookings</h1>
-    """
+  def mount(_params, _session, socket) do
+    {:ok,
+     socket
+     |> assign(page_title: "Appointments")
+     |> assign(bookings: Bookings.list_bookings())}
   end
 end

@@ -93,7 +93,7 @@ defmodule AgroconnectWeb.Router do
       live "/profile", Vets.Profile, :index
       live "/messages", Vets.Messages, :index
       live "/opening-hours", Vets.Hours, :index
-      live "/appointments", Vets.Appointments, :index
+      live "/appointments", Vets.Appointments.Index, :index
       live "/contact-us", Vets.Contact, :index
     end
   end

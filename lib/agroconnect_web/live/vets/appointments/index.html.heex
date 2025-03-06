@@ -1,0 +1,42 @@
+<div class="p-6 bg-gray-50 min-h-screen">
+  <div class="container mx-auto">
+    <div class="bg-white shadow-md rounded-lg border border-gray-200">
+      <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+        <h2 class="text-2xl font-semibold text-gray-800">Clinic Dashboard</h2>
+        <div class="flex space-x-3">
+          <.button>
+            click
+          </.button>
+          <.button>
+            click
+          </.button>
+        </div>
+      </div>
+
+      <div class="px-6 py-4">
+        <h3 class="text-lg font-medium text-gray-700 mb-4">Bookings</h3>
+
+        <.table id="bookings" rows={@bookings}>
+          <:col :let={{_id, booking}} label="Booked by">{booking.title}</:col>
+          <:col :let={{_id, booking}} label="Date">{booking.status}</:col>
+          <:col :let={{_id, booking}} label="Start Time">{booking.start_time}</:col>
+
+          <:action :let={{_id, booking}}>
+            <div class="sr-only">
+              <.link navigate={~p"/bookings/#{booking}"}>Show</.link>
+            </div>
+            <.link patch={~p"/bookings/#{booking}/edit"}>Edit</.link>
+          </:action>
+          <:action :let={{id, booking}}>
+            <.link
+              phx-click={JS.push("delete", value: %{id: booking.id}) |> hide("##{id}")}
+              data-confirm="Are you sure you want to delete?"
+            >
+              Delete
+            </.link>
+          </:action>
+        </.table>
+      </div>
+    </div>
+  </div>
+</div>

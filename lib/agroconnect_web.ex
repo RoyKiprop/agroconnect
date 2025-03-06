@@ -130,6 +130,7 @@ defmodule AgroconnectWeb do
       import Phoenix.HTML
       # Core UI components and translation
       import AgroconnectWeb.CoreComponents
+
       import AgroconnectWeb.Gettext
       import AgroconnectWeb.VetComponents
       import AgroconnectWeb.UserComponents
