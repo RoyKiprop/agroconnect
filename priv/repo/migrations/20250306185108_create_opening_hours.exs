@@ -3,7 +3,7 @@ defmodule Agroconnect.Repo.Migrations.CreateOpeningHours do
 
   def change do
     create table(:opening_hours) do
-      add :day_of_week, :integer
+      add :day_of_week, :string
       add :start_time, :time
       add :end_time, :time
       add :vet_id, references(:users, on_delete: :nothing)

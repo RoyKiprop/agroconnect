@@ -1,0 +1,71 @@
+<div class="p-6 bg-gray-50 min-h-screen">
+  <div class="flex items-center mb-4 space-x-6 px-4">
+    <div class="relative">
+      <i class="fas fa-bell text-emerald-500 text-2xl"></i>
+      <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center">
+        3
+      </span>
+    </div>
+    <i class="fas fa-cog text-emerald-500 text-2xl"></i>
+  </div>
+
+  <div class="container mx-auto">
+    <div class="bg-white shadow-md rounded-xl border-4 border-emerald-500 p-5 bg-[#eeeff1]">
+      <div class="px-6 py-4 flex items-center justify-between">
+        <h2 class="text-2xl font-semibold text-gray-800">Opening Hours</h2>
+      </div>
+
+      <div class="p-6 bg-white mx-6 rounded-xl">
+        <div class="mb-4">
+          <.header>
+            Listing Opening hours
+            <:actions>
+              <.link patch={~p"/vet/opening-hours/new"}>
+                <.button>New Opening</.button>
+              </.link>
+            </:actions>
+          </.header>
+        </div>
+
+        <.table
+          id="opening_hours"
+          rows={@streams.opening_hours}
+          row_click={
+            fn {_id, opening_hour} -> JS.navigate(~p"/opening-hours/#{opening_hour}") end
+          }
+        >
+          <:col :let={{_id, opening_hour}} label="Day">{opening_hour.day_of_week}</:col>
+          <:col :let={{_id, opening_hour}} label="Opening">{opening_hour.start_time}</:col>
+          <:col :let={{_id, opening_hour}} label="Closing">{opening_hour.end_time}</:col>
+          <:action :let={{_id, opening_hour}}>
+            <.link patch={~p"/vet/opening-hours/#{opening_hour}/edit"}>Edit</.link>
+          </:action>
+          <:action :let={{id, opening_hour}}>
+            <.link
+              phx-click={JS.push("delete", value: %{id: opening_hour.id}) |> hide("##{id}")}
+              data-confirm="Are you sure?"
+            >
+              Delete
+            </.link>
+          </:action>
+        </.table>
+
+        <.modal
+          :if={@live_action in [:new, :edit]}
+          id="opening_hour-modal"
+          show
+          on_cancel={JS.patch(~p"/vet/opening-hours")}
+        >
+          <.live_component
+            module={AgroconnectWeb.OpeningHourLive.FormComponent}
+            id={@opening_hour.id || :new}
+            title={@page_title}
+            action={@live_action}
+            opening_hour={@opening_hour}
+            patch={~p"/vet/opening-hours"}
+          />
+        </.modal>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,7 +9,6 @@ defmodule AgroconnectWeb.OpeningHourLive.FormComponent do
     <div>
       <.header>
         {@title}
-        <:subtitle>Use this form to manage opening_hour records in your database.</:subtitle>
       </.header>
 
       <.simple_form
@@ -19,9 +18,22 @@ defmodule AgroconnectWeb.OpeningHourLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:day_of_week]} type="number" label="Day of week" />
-        <.input field={@form[:start_time]} type="time" label="Start time" />
-        <.input field={@form[:end_time]} type="time" label="End time" />
+        <.input
+          field={@form[:day_of_week]}
+          type="select"
+          label="Day of week"
+          options={[
+            {"Monday", "monday"},
+            {"Tuesday", "tuesday"},
+            {"Wednesday", "wednesday"},
+            {"Thursday", "thursday"},
+            {"Friday", "friday"},
+            {"Saturday", "saturday"},
+            {"Sunday", "sunday"}
+          ]}
+        />
+        <.input field={@form[:start_time]} type="time" label="Opening" />
+        <.input field={@form[:end_time]} type="time" label="Closing" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Opening hour</.button>
         </:actions>
