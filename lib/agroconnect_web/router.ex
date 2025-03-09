@@ -106,7 +106,9 @@ defmodule AgroconnectWeb.Router do
     live_session(:user_dashboard, on_mount: [{AgroconnectWeb.UserAuth, :mount_current_user}]) do
       live "/", Users.Profile, :index
       live "/ai-assistant", Users.Chatbot, :index
-      live "/bookings", Users.Bookings, :index
+      live "/bookings", Users.Bookings.Index, :index
+      live "/bookings/new", Users.Bookings.Index, :new
+      live "/bookings/:id/edit", Users.Bookings.Index, :edit
       live "/messages", Users.Messages, :index
       live "/upload-image", Users.Ai, :index
       live "/my-appointments", Users.Appointments, :index

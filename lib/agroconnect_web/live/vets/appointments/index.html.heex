@@ -20,8 +20,8 @@
         <.table id="bookings" rows={@bookings}>
           <:col :let={{_id, booking}} label="Booked by">{booking.title}</:col>
 
-          <:col :let={{_id, booking}} label="Start Time">{booking.start_time}</:col>
-          <:col :let={{_id, booking}} label="End Time">{booking.start_time}</:col>
+          <:col :let={{_id, booking}} label="From">{booking.start_time}</:col>
+          <:col :let={{_id, booking}} label="To">{booking.start_time}</:col>
           <:col :let={{_id, booking}} label="Status">{booking.start_time}</:col>
 
           <:action :let={{_id, booking}}>

@@ -30,4 +30,8 @@ defmodule Agroconnect.Bookings do
     |> Booking.changeset(%{deleted_at: DateTime.utc_now()})
     |> @repo.update()
   end
+
+  def change_booking(%Booking{} = booking, attrs \\ %{}) do
+    Booking.changeset(booking, attrs)
+  end
 end

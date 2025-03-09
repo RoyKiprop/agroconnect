@@ -12,6 +12,7 @@ defmodule Agroconnect.Bookings.Booking do
     field :notes, :string
     field :start_time, :utc_datetime
     field :status, :string
+    field :appointment_type, :string, default: "in person"
     field :user_id, :id
     field :vet_id, :id
     field :deleted_at, :utc_datetime
@@ -29,10 +30,20 @@ defmodule Agroconnect.Bookings.Booking do
       :end_time,
       :status,
       :animal_type,
+      :appointment_type,
       :notes,
       :deleted_at
     ])
-    |> validate_required([:user_id, :vet_id, :date, :start_time, :end_time, :status, :animal_type])
+    |> validate_required([
+      :user_id,
+      :vet_id,
+      :date,
+      :start_time,
+      :end_time,
+      :status,
+      :animal_type,
+      :appointment_type
+    ])
     |> validate_inclusion(:status, ["pending", "confirmed", "completed", "cancelled"])
   end
 
@@ -48,7 +59,16 @@ defmodule Agroconnect.Bookings.Booking do
       :animal_type,
       :notes
     ])
-    |> validate_required([:user_id, :vet_id, :date, :start_time, :end_time, :status, :animal_type])
+    |> validate_required([
+      :user_id,
+      :vet_id,
+      :date,
+      :start_time,
+      :end_time,
+      :status,
+      :animal_type,
+      :appointment_type
+    ])
     |> validate_inclusion(:status, ["pending", "confirmed", "completed", "cancelled"])
   end
 end

@@ -12,31 +12,34 @@
   <div class="container mx-auto">
     <div class="bg-white shadow-md rounded-xl border-4 border-emerald-500 p-5 bg-[#eeeff1]">
       <div class="px-6 py-4 flex items-center justify-between">
-        <h2 class="text-2xl font-semibold text-gray-800">Opening Hours</h2>
+        <h2 class="text-2xl font-semibold text-gray-800">Bookings</h2>
       </div>
 
       <div class="p-6 bg-white mx-6 rounded-xl">
         <div class="mb-4">
           <.header>
-            Listing Opening hours
+            Listing Bookings
             <:actions>
-              <.link patch={~p"/vet/opening-hours/new"}>
-                <.button>New Opening</.button>
+              <.link patch={~p"/user/bookings/new"}>
+                <.button>New Booking</.button>
               </.link>
             </:actions>
           </.header>
         </div>
 
-        <.table id="opening_hours" rows={@streams.opening_hours}>
-          <:col :let={{_id, opening_hour}} label="Day">{opening_hour.day_of_week}</:col>
-          <:col :let={{_id, opening_hour}} label="Opening">{opening_hour.start_time}</:col>
-          <:col :let={{_id, opening_hour}} label="Closing">{opening_hour.end_time}</:col>
-          <:action :let={{_id, opening_hour}}>
-            <.link patch={~p"/vet/opening-hours/#{opening_hour}/edit"}>Edit</.link>
+        <.table id="bookings" rows={@streams.bookings}>
+          <:col :let={{_id, booking}} label="Vet Name">{booking.end_time}</:col>
+          <:col :let={{_id, booking}} label="Date">{booking.date}</:col>
+          <:col :let={{_id, booking}} label="From">{booking.start_time}</:col>
+          <:col :let={{_id, booking}} label="To">{booking.end_time}</:col>
+          <:col :let={{_id, booking}} label="Status">{booking.status}</:col>
+          <:col :let={{_id, booking}} label="Animal">{booking.animal_type}</:col>
+          <:action :let={{_id, booking}}>
+            <.link patch={~p"/user/bookings/#{booking}/edit"}>Edit</.link>
           </:action>
-          <:action :let={{id, opening_hour}}>
+          <:action :let={{id, booking}}>
             <.link
-              phx-click={JS.push("delete", value: %{id: opening_hour.id}) |> hide("##{id}")}
+              phx-click={JS.push("delete", value: %{id: booking.id}) |> hide("##{id}")}
               data-confirm="Are you sure?"
             >
               Delete
@@ -46,17 +49,17 @@
 
         <.modal
           :if={@live_action in [:new, :edit]}
-          id="opening_hour-modal"
+          id="booking-modal"
           show
-          on_cancel={JS.patch(~p"/vet/opening-hours")}
+          on_cancel={JS.patch(~p"/user/bookings")}
         >
           <.live_component
-            module={AgroconnectWeb.OpeningHourLive.FormComponent}
-            id={@opening_hour.id || :new}
+            module={AgroconnectWeb.Users.Bookings.FormComponent}
+            id={@booking.id || :new}
             title={@page_title}
             action={@live_action}
-            opening_hour={@opening_hour}
-            patch={~p"/vet/opening-hours"}
+            booking={@booking}
+            patch={~p"/user/bookings"}
           />
         </.modal>
       </div>

@@ -10,6 +10,7 @@ defmodule Agroconnect.Repo.Migrations.CreateBookingsTable do
       add :end_time, :utc_datetime, null: false
       add :status, :string, default: "pending", null: false
       add :animal_type, :string
+      add :appointment_type, :string, deffault: "in person", null: false
       add :notes, :text
       add :deleted_at, :utc_datetime
       timestamps()
