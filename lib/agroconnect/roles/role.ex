@@ -1,31 +1,19 @@
-defmodule Agroconnect.Roles.Role do
+defmodule Agroconnect.Role do
   use Ecto.Schema
-
   import Ecto.Changeset
 
   schema "roles" do
-    field(:name, :string)
-    field(:description, :string)
-    field(:deleted_at, :utc_datetime)
+    field :name, :string
+    field :description, :string
+    field :deleted_at, :utc_datetime
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
-  def changeset(role, params \\ %{}) do
+  @doc false
+  def changeset(role, attrs) do
     role
-    |> cast(params, [:name, :description, :deleted_at])
-    |> validate_required([:name])
-    |> validate_length(:name, min: 3, max: 25)
-    |> validate_length(:description, min: 5, max: 256)
-    |> unique_constraint([:name, :deleted_at])
-  end
-
-  def changeset_without_deleted_at(role, params \\ %{}) do
-    role
-    |> cast(params, [:name, :description])
-    |> validate_required([:name])
-    |> validate_length(:name, min: 3, max: 25)
-    |> validate_length(:description, min: 5, max: 256)
-    |> unique_constraint([:name, :deleted_at])
+    |> cast(attrs, [:name, :description, :deleted_at])
+    |> validate_required([:name, :description, :deleted_at])
   end
 end

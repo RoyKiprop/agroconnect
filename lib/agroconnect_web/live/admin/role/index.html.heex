@@ -1,0 +1,55 @@
+<div class="p-6 bg-gray-50 min-h-screen">
+  <div class="container mx-auto">
+    <div class="bg-white shadow-md rounded-xl border-4 border-emerald-500 p-5 bg-[#eeeff1]">
+      <div class="px-6 py-4 flex items-center justify-between">
+        <h2 class="text-2xl font-semibold text-gray-800">Roles</h2>
+      </div>
+
+      <div class="p-6 bg-white mx-6 rounded-xl">
+        <div class="mb-5">
+          <.header>
+            Listing Roles
+            <:actions>
+              <.link patch={~p"/admin/roles/new"}>
+                <.button>New Role</.button>
+              </.link>
+            </:actions>
+          </.header>
+        </div>
+
+        <.table id="roles" rows={@streams.roles}>
+          <:col :let={{_id, role}} label="Name">{role.name}</:col>
+          <:col :let={{_id, role}} label="Description">{role.description}</:col>
+          <:col :let={{_id, role}} label="Deleted at">{role.deleted_at}</:col>
+          <:action :let={{_id, role}}>
+            <.link patch={~p"/admin/roles/#{role}/edit"}>Edit</.link>
+          </:action>
+          <:action :let={{id, role}}>
+            <.link
+              phx-click={JS.push("delete", value: %{id: role.id}) |> hide("##{id}")}
+              data-confirm="Are you sure?"
+            >
+              Delete
+            </.link>
+          </:action>
+        </.table>
+
+        <.modal
+          :if={@live_action in [:new, :edit]}
+          id="role-modal"
+          show
+          on_cancel={JS.patch(~p"/admin/roles")}
+        >
+          <.live_component
+            module={AgroconnectWeb.AdminRole.FormComponent}
+            id={@role.id || :new}
+            title={@page_title}
+            action={@live_action}
+            role={@role}
+            patch={~p"/admin/roles"}
+          />
+        </.modal>
+      </div>
+    </div>
+  </div>
+</div>
