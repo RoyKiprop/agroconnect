@@ -1,5 +1,5 @@
 defmodule AgroconnectWeb.Admin.VetsLive.FormComponent do
-  use AgroconnectWeb, :admin_live_view
+  use AgroconnectWeb, :live_component
 
   alias Agroconnect.Account.Users
 
@@ -31,6 +31,7 @@ defmodule AgroconnectWeb.Admin.VetsLive.FormComponent do
     """
   end
 
+  @impl true
   def update(%{user: user} = assigns, socket) do
     {:ok,
      socket

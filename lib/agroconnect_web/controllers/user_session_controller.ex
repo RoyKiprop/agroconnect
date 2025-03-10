@@ -1,7 +1,7 @@
 defmodule AgroconnectWeb.UserSessionController do
   use AgroconnectWeb, :controller
 
-  alias Agroconnect.Users.Users
+  alias Agroconnect.Account.Users
   alias AgroconnectWeb.UserAuth
 
   def create(conn, %{"_action" => "registered"} = params) do
