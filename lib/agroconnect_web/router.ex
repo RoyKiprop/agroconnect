@@ -79,7 +79,9 @@ defmodule AgroconnectWeb.Router do
       live "/users", Admin.UsersLive.Index, :index
       live "/users/new", Admin.UsersLive.Index, :new
       live "/users/:id/edit", Admin.UsersLive.Index, :edit
-      live "/vets", Admin.VetsLive, :index
+      live "/vets", Admin.VetsLive.Index, :index
+      live "/vets/new", Admin.Vets.Index, :new
+      live "/vets/:id/edit", Admin.Vets.Index, :edit
       live "/roles", AdminRole.Index, :index
       live "/roles/new", AdminRole.Index, :new
       live "/roles/:id/edit", AdminRole.Index, :edit

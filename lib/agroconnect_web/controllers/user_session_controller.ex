@@ -1,11 +1,11 @@
 defmodule AgroconnectWeb.UserSessionController do
   use AgroconnectWeb, :controller
 
-  alias Agroconnect.Account
+  alias Agroconnect.Users.Users
   alias AgroconnectWeb.UserAuth
 
   def create(conn, %{"_action" => "registered"} = params) do
-    create(conn, params, "Account created successfully!")
+    create(conn, params, "Users created successfully!")
   end
 
   def create(conn, %{"_action" => "password_updated"} = params) do
@@ -21,7 +21,7 @@ defmodule AgroconnectWeb.UserSessionController do
   defp create(conn, %{"user" => user_params}, info) do
     %{"email" => email, "password" => password} = user_params
 
-    if user = Account.get_user_by_email_and_password(email, password) do
+    if user = Users.get_user_by_email_and_password(email, password) do
       conn
       |> put_flash(:info, info)
       |> UserAuth.log_in_user(user, user_params)
