@@ -1,4 +1,4 @@
-defmodule Agroconnect.Account do
+defmodule Agroconnect.Account.Users do
   @moduledoc """
   The Account context.
   """
@@ -59,6 +59,37 @@ defmodule Agroconnect.Account do
 
   """
   def get_user!(id), do: Repo.get!(User, id)
+
+  @doc """
+  list all users.
+  """
+
+  def list_users do
+    Repo.all(User)
+  end
+
+  @doc """
+  Creates a user.
+  """
+
+  def create_user(attrs \\ %{}) do
+    %User{}
+    |> User.create_changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a user.
+  """
+  def update_user(%User{} = user, attrs) do
+    user
+    |> User.create_changeset(attrs)
+    |> Repo.update()
+  end
+
+  def change_user(%User{} = user, attrs \\ %{}) do
+    User.create_changeset(user, attrs)
+  end
 
   ## User registration
 

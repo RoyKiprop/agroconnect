@@ -1,17 +1,17 @@
 defmodule AgroconnectWeb.UserConfirmationLive do
   use AgroconnectWeb, :live_view
 
-  alias Agroconnect.Account
+  alias Agroconnect.Account.Users
 
   def render(%{live_action: :edit} = assigns) do
     ~H"""
     <div class="mx-auto max-w-sm">
-      <.header class="text-center">Confirm Account</.header>
+      <.header class="text-center">Confirm Users</.header>
 
-      <.simple_form for={@form} id="confirmation_form" phx-submit="confirm_account">
+      <.simple_form for={@form} id="confirmation_form" phx-submit="confirm_Users">
         <input type="hidden" name={@form[:token].name} value={@form[:token].value} />
         <:actions>
-          <.button phx-disable-with="Confirming..." class="w-full">Confirm my account</.button>
+          <.button phx-disable-with="Confirming..." class="w-full">Confirm my Users</.button>
         </:actions>
       </.simple_form>
 
@@ -29,9 +29,9 @@ defmodule AgroconnectWeb.UserConfirmationLive do
   end
 
   # Do not log in the user after confirmation to avoid a
-  # leaked token giving the user access to the account.
-  def handle_event("confirm_account", %{"user" => %{"token" => token}}, socket) do
-    case Account.confirm_user(token) do
+  # leaked token giving the user access to the Users.
+  def handle_event("confirm_Users", %{"user" => %{"token" => token}}, socket) do
+    case Users.confirm_user(token) do
       {:ok, _} ->
         {:noreply,
          socket
@@ -39,7 +39,7 @@ defmodule AgroconnectWeb.UserConfirmationLive do
          |> redirect(to: ~p"/")}
 
       :error ->
-        # If there is a current user and the account was already confirmed,
+        # If there is a current user and the Users was already confirmed,
         # then odds are that the confirmation link was already visited, either
         # by some automation or by the user themselves, so we redirect without
         # a warning message.

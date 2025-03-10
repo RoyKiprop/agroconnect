@@ -42,6 +42,22 @@ defmodule Agroconnect.Account.User do
     |> validate_password(opts)
   end
 
+  @doc """
+  A user changeset for creating a new user.
+  Provides basic validation for creating a new user
+  """
+
+  def create_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:email, :password])
+    |> validate_required([:email, :password])
+
+    # |> validate_length(:password, min: 12, max: 72)
+    # |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "must have the @ sign and no spaces")
+    # |> validate_length(:email, max: 160)
+    # |> validate_format(:password, ~r/[a-z]/, message: "at least one lower case character")
+  end
+
   defp validate_email(changeset, opts) do
     changeset
     |> validate_required([:email])

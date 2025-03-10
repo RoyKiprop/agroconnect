@@ -76,7 +76,9 @@ defmodule AgroconnectWeb.Router do
 
     live_session(:admin, on_mount: [{AgroconnectWeb.UserAuth, :mount_current_user}]) do
       live "/", Admin.Dashboard, :index
-      live "/users", Admin.UsersLive, :index
+      live "/users", Admin.UsersLive.Index, :index
+      live "/users/new", Admin.UsersLive.Index, :new
+      live "/users/:id/edit", Admin.UsersLive.Index, :edit
       live "/vets", Admin.VetsLive, :index
       live "/roles", AdminRole.Index, :index
       live "/roles/new", AdminRole.Index, :new

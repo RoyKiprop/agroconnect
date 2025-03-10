@@ -1,7 +1,7 @@
 defmodule AgroconnectWeb.UserForgotPasswordLive do
   use AgroconnectWeb, :login_live_view
 
-  alias Agroconnect.Account
+  alias Agroconnect.Account.Users
 
   def render(assigns) do
     ~H"""
@@ -45,8 +45,8 @@ defmodule AgroconnectWeb.UserForgotPasswordLive do
   end
 
   def handle_event("send_email", %{"user" => %{"email" => email}}, socket) do
-    if user = Account.get_user_by_email(email) do
-      Account.deliver_user_reset_password_instructions(
+    if user = Users.get_user_by_email(email) do
+      Users.deliver_user_reset_password_instructions(
         user,
         &url(~p"/users/reset_password/#{&1}")
       )

@@ -1,15 +1,15 @@
 defmodule AgroconnectWeb.UserRegistrationLive do
   use AgroconnectWeb, :register_live_view
 
-  alias Agroconnect.Account
   alias Agroconnect.Account.User
+  alias Agroconnect.Account.Users
 
   def render(assigns) do
     ~H"""
     <div class="mx-auto max-w-xl">
       <.header class="text-center space-y-2">
         <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-emerald-800 drop-shadow-sm mb-4">
-          Register for an account
+          Register for an Users
         </h2>
         <p class="text-gray-600">
           Already registered?
@@ -19,7 +19,7 @@ defmodule AgroconnectWeb.UserRegistrationLive do
           >
             Log in
           </.link>
-          to your account now.
+          to your Users now.
         </p>
       </.header>
 
@@ -82,16 +82,16 @@ defmodule AgroconnectWeb.UserRegistrationLive do
 
         <:actions>
           <.button
-            phx-disable-with="Creating account..."
+            phx-disable-with="Creating Users..."
             class="w-full bg-emerald-600 text-white hover:bg-emerald-700"
           >
-            Create an account
+            Create an Users
           </.button>
         </:actions>
       </.simple_form>
 
       <p class="text-center text-sm mt-4 text-gray-600">
-        By creating an account, you agree to our
+        By creating an Users, you agree to our
         <.link href="#" class="text-emerald-600 hover:text-emerald-700 font-semibold">
           Terms of Service
         </.link>
@@ -105,7 +105,7 @@ defmodule AgroconnectWeb.UserRegistrationLive do
   end
 
   def mount(_params, _session, socket) do
-    changeset = Account.change_user_registration(%User{})
+    changeset = Users.change_user_registration(%User{})
 
     socket =
       socket
@@ -116,15 +116,15 @@ defmodule AgroconnectWeb.UserRegistrationLive do
   end
 
   def handle_event("save", %{"user" => user_params}, socket) do
-    case Account.register_user(user_params) do
+    case Users.register_user(user_params) do
       {:ok, user} ->
         {:ok, _} =
-          Account.deliver_user_confirmation_instructions(
+          Users.deliver_user_confirmation_instructions(
             user,
             &url(~p"/users/confirm/#{&1}")
           )
 
-        changeset = Account.change_user_registration(user)
+        changeset = Users.change_user_registration(user)
         {:noreply, socket |> assign(trigger_submit: true) |> assign_form(changeset)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -133,7 +133,7 @@ defmodule AgroconnectWeb.UserRegistrationLive do
   end
 
   def handle_event("validate", %{"user" => user_params}, socket) do
-    changeset = Account.change_user_registration(%User{}, user_params)
+    changeset = Users.change_user_registration(%User{}, user_params)
     {:noreply, assign_form(socket, Map.put(changeset, :action, :validate))}
   end
 

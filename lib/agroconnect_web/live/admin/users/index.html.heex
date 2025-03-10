@@ -1,0 +1,54 @@
+<div class="p-6 bg-gray-50 min-h-screen">
+  <div class="container mx-auto">
+    <div class="bg-white shadow-md rounded-xl border-4 border-emerald-500 p-5 bg-[#eeeff1]">
+      <div class="px-6 py-4 flex items-center justify-between">
+        <h2 class="text-2xl font-semibold text-gray-800">Users</h2>
+      </div>
+
+      <div class="p-6 bg-white mx-6 rounded-xl">
+        <div class="my-3">
+          <.header>
+            Listing Users
+            <:actions>
+              <.link patch={~p"/admin/users/new"}>
+                <.button>New User</.button>
+              </.link>
+            </:actions>
+          </.header>
+        </div>
+
+        <.table id="users" rows={@streams.users}>
+          <:col :let={{_id, user}} label="Name">{user.name}</:col>
+          <:col :let={{_id, user}} label="Email">{user.email}</:col>
+          <:col :let={{_id, user}} label="Role">{user.role}</:col>
+
+          <:action :let={{_id, user}}>
+            <.link patch={~p"/admin/users/#{user}/edit"}>Edit</.link>
+          </:action>
+
+          <:action :let={{_id, user}}>
+            <.link phx-click={JS.push("resend_mail", value: %{id: user.id})}>
+              Reset
+            </.link>
+          </:action>
+        </.table>
+
+        <.modal
+          :if={@live_action in [:new, :edit]}
+          id="user-modal"
+          show
+          on_cancel={JS.patch(~p"/admin/users")}
+        >
+          <.live_component
+            module={AgroconnectWeb.Admin.Users.FormComponent}
+            id={@user.id || :new}
+            title={@page_title}
+            action={@live_action}
+            user={@user}
+            patch={~p"/admin/users"}
+          />
+        </.modal>
+      </div>
+    </div>
+  </div>
+</div>
